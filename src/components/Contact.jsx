@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, ChevronDown, Send, CheckCircle2, Building2, ExternalLink } from 'lucide-react';
 import { navigateTo } from '../lib/cms';
+import logoImage from '../../assets/site logo.png';
 
 export default function Contact({ darkMode }) {
   const [openFaq, setOpenFaq] = useState(0);
@@ -190,41 +191,71 @@ export default function Contact({ darkMode }) {
         </div>
 
         {/* Official Institutional Footer */}
-        <footer className={`pt-8 border-t space-y-4 ${
-          darkMode ? 'border-white/10 text-slate-400' : 'border-slate-300 text-slate-600'
+        <footer className={`pt-12 border-t space-y-8 ${
+          darkMode ? 'border-white/10' : 'border-slate-300'
         }`}>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
-                <Building2 className="w-4 h-4" />
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Brand Section */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <img src={logoImage} alt="E-Cell Logo" className="w-8 h-8 object-contain" />
+                <div>
+                  <h4 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-zinc-900'}`}>E-CELL</h4>
+                  <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Student entrepreneurship club</p>
+                </div>
               </div>
-              <div>
-                <span className={`font-bold block ${darkMode ? 'text-white' : 'text-zinc-900'}`}>E-CELL</span>
-                <span className="text-[11px]">Malla Reddy University · student entrepreneurship club</span>
-              </div>
+              <p className={`text-xs leading-relaxed max-w-xs ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+                Building the next generation of founders at Malla Reddy Deemed to be University through mentorship, events, and startup incubation support.
+              </p>
             </div>
 
-            <div className="flex items-center gap-6 text-[11px] font-semibold">
-              <a href="#about" className="hover:text-indigo-600 transition-colors">About</a>
-              <a href="#events" className="hover:text-indigo-600 transition-colors">Events</a>
-              <a href="#team" className="hover:text-indigo-600 transition-colors">Team</a>
-              <a href="https://mallareddyuniversity.ac.in" target="_blank" rel="noreferrer" className="hover:text-indigo-600 transition-colors flex items-center gap-1">
-                University site <ExternalLink className="w-3 h-3" />
-              </a>
+            {/* Quick Links */}
+            <div className="space-y-3">
+              <h5 className={`text-xs font-bold uppercase tracking-widest ${darkMode ? 'text-white' : 'text-slate-900'}`}>Quick Links</h5>
+              <ul className="space-y-2 text-xs">
+                <li><a href="#about" className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-700'} transition-colors`}>About E-CELL</a></li>
+                <li><a href="#events" className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-700'} transition-colors`}>Events & Workshops</a></li>
+                <li><a href="#team" className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-700'} transition-colors`}>Leadership Team</a></li>
+                <li><a href="#gallery" className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-700'} transition-colors`}>Gallery & Media</a></li>
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <h5 className={`text-xs font-bold uppercase tracking-widest ${darkMode ? 'text-white' : 'text-slate-900'}`}>Contact</h5>
+              <ul className="space-y-2 text-xs">
+                <li className="flex items-start gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                  <span className={darkMode ? 'text-slate-400' : 'text-slate-600'}>Maisammaguda, Dhulapally, Hyderabad, Telangana - 500100</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
+                  <a href="mailto:ecell@mallareddyuniversity.ac.in" className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-blue-700'} transition-colors`}>ecell@mallareddyuniversity.ac.in</a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          <div className={`pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] ${
-            darkMode ? 'border-white/5 text-slate-500' : 'border-slate-200 text-slate-500'
+          {/* Divider */}
+          <div className={`border-t ${darkMode ? 'border-white/10' : 'border-slate-200'}`} />
+
+          {/* Bottom Bar */}
+          <div className={`flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] ${
+            darkMode ? 'text-slate-500' : 'text-slate-500'
           }`}>
-            <p>© 2026 E-CELL, Malla Reddy University.</p>
-            <button
-              type="button"
-              onClick={() => navigateTo('/admin')}
-              className="hover:text-blue-600 transition-colors"
-            >
-              Admin login
-            </button>
+            <p>© 2026 E-CELL, Malla Reddy Deemed to be University. All rights reserved.</p>
+            <div className="flex items-center gap-4">
+              <a href="https://mallareddyuniversity.ac.in" target="_blank" rel="noreferrer" className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-blue-700'} transition-colors flex items-center gap-1`}>
+                University Site <ExternalLink className="w-3 h-3" />
+              </a>
+              <button
+                type="button"
+                onClick={() => navigateTo('/admin')}
+                className={`${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-blue-700'} transition-colors`}
+              >
+                Admin
+              </button>
+            </div>
           </div>
         </footer>
 

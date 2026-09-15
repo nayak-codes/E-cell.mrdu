@@ -65,6 +65,18 @@ export const defaultGallery = [
     id: 1,
     type: 'photo',
     featured: true,
+    category: 'Logo',
+    eventBadge: 'BRANDING',
+    eventBadgeColor: 'bg-purple-600',
+    title: 'E-Cell Logo',
+    description: 'Official E-Cell branding and identity.',
+    url: 'data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjEwMCIgZmlsbD0iIzAwMGQxZiIvPjxwYXRoIGQ9Ik0gNTUgNTAgTCA3NSA1MCBMIDc1IDgwIEwgNjUgODAgTCA2NSAxMjAgTCA3NSAxMjAgTCA3NSAxNTAgTCA1NSAxNTAgWiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cmVjdCB4PSI4NSIgeT0iODUiIHdpZHRoPSI2MCIgaGVpZ2h0PSIzMCIgZmlsbD0iI0ZGM0QwMCIgdHJhbnNmb3JtPSJza2V3WCgtMTUpIi8+PHBhdGggZD0iTSAxNDUgNTAgTCAxMjUgNTAgTCAxMjUgODAgTCAxMzUgODAgTCAxMzUgMTIwIEwgMTI1IDEyMCBMIDEyNSAxNTAgTCAxNDUgMTUwIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+PC9zdmc+',
+    date: 'Sep 2026',
+  },
+  {
+    id: 2,
+    type: 'photo',
+    featured: true,
     category: 'E-Summit 2026',
     eventBadge: 'UPCOMING',
     eventBadgeColor: 'bg-blue-600',
@@ -74,7 +86,7 @@ export const defaultGallery = [
     date: 'Oct 24–25, 2026',
   },
   {
-    id: 2,
+    id: 3,
     type: 'photo',
     featured: false,
     category: 'E-Summit 2026',
@@ -86,7 +98,7 @@ export const defaultGallery = [
     date: 'Oct 24–25, 2026',
   },
   {
-    id: 3,
+    id: 4,
     type: 'photo',
     featured: true,
     category: 'Hackathon 2026',
@@ -98,7 +110,7 @@ export const defaultGallery = [
     date: 'Nov 14–15, 2026',
   },
   {
-    id: 4,
+    id: 5,
     type: 'photo',
     featured: false,
     category: 'Hackathon 2026',
@@ -110,7 +122,7 @@ export const defaultGallery = [
     date: 'Nov 15, 2026',
   },
   {
-    id: 5,
+    id: 6,
     type: 'photo',
     featured: true,
     category: 'Workshop',
@@ -122,7 +134,7 @@ export const defaultGallery = [
     date: 'Sep 28, 2026',
   },
   {
-    id: 6,
+    id: 7,
     type: 'photo',
     featured: false,
     category: 'Workshop',
@@ -134,7 +146,7 @@ export const defaultGallery = [
     date: 'Sep 28, 2026',
   },
   {
-    id: 7,
+    id: 8,
     type: 'photo',
     featured: true,
     category: 'Investor Pitch',
@@ -146,7 +158,7 @@ export const defaultGallery = [
     date: 'Dec 08, 2026',
   },
   {
-    id: 8,
+    id: 9,
     type: 'photo',
     featured: false,
     category: 'Incubation',
@@ -158,7 +170,7 @@ export const defaultGallery = [
     date: 'May 2025',
   },
   {
-    id: 9,
+    id: 10,
     type: 'photo',
     featured: false,
     category: 'Incubation',
@@ -170,7 +182,7 @@ export const defaultGallery = [
     date: 'Sep 2026',
   },
   {
-    id: 10,
+    id: 11,
     type: 'photo',
     featured: false,
     category: 'Guest Lectures',

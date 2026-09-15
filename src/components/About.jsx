@@ -95,7 +95,7 @@ export default function About({ darkMode }) {
             What we do, in simple words
           </h2>
           <p className={`mt-4 text-base leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-            E-CELL is the student entrepreneurship club at Malla Reddy University.
+            E-CELL is the student entrepreneurship club at Malla Reddy Deemed to be University.
             We help you start — from a rough idea to a team, a prototype, and your first users.
           </p>
         </div>

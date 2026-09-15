@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles, Sun, Moon, Zap } from 'lucide-react';
+import { Menu, X, Sparkles, Sun, Moon } from 'lucide-react';
 import { useCms } from '../context/CmsContext';
+import logoImage from '../../assets/site logo.png';
 
 export default function Navbar({ darkMode, onToggleTheme, onOpenPitchModal }) {
   const { cms } = useCms();
@@ -60,15 +61,13 @@ export default function Navbar({ darkMode, onToggleTheme, onOpenPitchModal }) {
         <div className="max-w-6xl mx-auto px-4">
           <div className="h-16 flex items-center justify-between gap-4">
             <a href="#" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white flex items-center justify-center shadow-md shadow-indigo-500/25">
-                <Zap className="w-4 h-4 fill-white" />
-              </div>
+              <img src={logoImage} alt="E-Cell Logo" className="w-9 h-9 object-contain" />
               <div className="leading-tight">
                 <p className={`text-[15px] font-bold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
                   E-CELL
                 </p>
-                <p className={`text-[10px] font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  Malla Reddy University
+                <p className={`text-[9px] font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                  Malla Reddy Deemed to be University
                 </p>
               </div>
             </a>
