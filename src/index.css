@@ -4,55 +4,85 @@
 
 @layer base {
   h1, h2, h3, h4 {
-    font-family: Outfit, Inter, sans-serif;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   }
 }
 
 @layer components {
   .admin-input {
-    @apply w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-blue-500 text-sm;
+    @apply w-full px-3.5 py-2 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:border-indigo-500 text-sm;
   }
   .section-anchor {
-    scroll-margin-top: 8.5rem;
+    scroll-margin-top: 7rem;
   }
 }
 
 @layer utilities {
   .pro-card-light {
     background: #ffffff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e4e4e7;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
   }
   .pro-card-light:hover {
-    border-color: #2563eb;
-    box-shadow: 0 10px 25px -4px rgba(37, 99, 235, 0.12);
+    border-color: #a5b4fc;
+    box-shadow: 0 10px 24px -8px rgba(79, 70, 229, 0.15);
     transform: translateY(-2px);
   }
 
   .pro-card-dark {
-    background: rgba(15, 23, 42, 0.8);
+    background: rgba(24, 24, 27, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .pro-card-dark:hover {
-    border-color: rgba(59, 130, 246, 0.4);
+    border-color: rgba(129, 140, 248, 0.45);
     box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
     transform: translateY(-2px);
   }
 
   .text-gradient-light {
-    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #0d9488 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-500;
   }
-  
+
   .text-gradient-dark {
-    background: linear-gradient(135deg, #ffffff 0%, #60a5fa 50%, #34d399 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-violet-300;
   }
 }
 
-/* Ticker marquee animation */
+@keyframes team-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-fade,
+.team-card {
+  animation: team-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.team-card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px -18px rgba(79, 70, 229, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-fade,
+  .team-card {
+    animation: none;
+  }
+  .team-card:hover {
+    transform: none;
+  }
+}
+
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -68,7 +98,6 @@
   animation-play-state: paused;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -77,9 +106,9 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d4d4d8;
   border-radius: 3px;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #3f3f46;
 }

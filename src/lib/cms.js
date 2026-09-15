@@ -6,6 +6,7 @@ export const CMS_CHANNEL = 'mru-ecell-cms';
 
 export function normalizeCms(parsed) {
   return {
+    updatedAt: Number(parsed?.updatedAt) || 0,
     announcements: Array.isArray(parsed?.announcements) ? parsed.announcements : defaultCms.announcements,
     events: Array.isArray(parsed?.events) ? parsed.events : defaultCms.events,
     gallery: Array.isArray(parsed?.gallery) ? parsed.gallery : defaultCms.gallery,
@@ -14,24 +15,48 @@ export function normalizeCms(parsed) {
   };
 }
 
+export function isLikelyCms(data) {
+  return data && typeof data === 'object' && Array.isArray(data.events) && Array.isArray(data.gallery) && Array.isArray(data.team);
+}
+
+export function pickNewer(a, b) {
+  if (!isLikelyCms(a)) return isLikelyCms(b) ? normalizeCms(b) : null;
+  if (!isLikelyCms(b)) return normalizeCms(a);
+  return (Number(a.updatedAt) || 0) >= (Number(b.updatedAt) || 0) ? normalizeCms(a) : normalizeCms(b);
+}
+
 export function loadCms() {
   try {
     const raw = localStorage.getItem(CMS_KEY);
-    if (!raw) return structuredClone(defaultCms);
-    return normalizeCms(JSON.parse(raw));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return isLikelyCms(parsed) ? normalizeCms(parsed) : null;
   } catch {
-    return structuredClone(defaultCms);
+    return null;
   }
 }
 
 export function saveCms(data) {
-  localStorage.setItem(CMS_KEY, JSON.stringify(data));
+  try {
+    localStorage.setItem(CMS_KEY, JSON.stringify(data));
+  } catch {
+    localStorage.setItem(CMS_KEY, JSON.stringify({
+      ...data,
+      gallery: (data.gallery || []).map((item) => ({ ...item, url: item.url?.startsWith('data:') ? '' : item.url })),
+      team: (data.team || []).map((item) => ({ ...item, image: item.image?.startsWith('data:') ? '' : item.image })),
+      events: (data.events || []).map((item) => ({ ...item, image: item.image?.startsWith('data:') ? '' : item.image })),
+    }));
+  }
 }
 
 export async function fetchCms() {
   const res = await fetch('/api/cms', { cache: 'no-store' });
   if (!res.ok) throw new Error('Could not load live content');
-  return normalizeCms(await res.json());
+  const type = res.headers.get('content-type') || '';
+  if (!type.includes('application/json')) throw new Error('Not JSON');
+  const parsed = await res.json();
+  if (!isLikelyCms(parsed)) throw new Error('Invalid CMS payload');
+  return normalizeCms(parsed);
 }
 
 export async function publishCms(data) {
@@ -56,13 +81,13 @@ export function broadcastCms(data) {
   }
 }
 
-export function resetCms() {
+export async function resetCms() {
   localStorage.removeItem(CMS_KEY);
-  return structuredClone(defaultCms);
+  return { ...structuredClone(defaultCms), updatedAt: Date.now() };
 }
 
-export async function uploadImageFile(file, maxWidth = 1400) {
-  const dataUrl = await fileToDataUrl(file, maxWidth);
+export async function uploadImageFile(file, maxWidth = 1000) {
+  const dataUrl = await fileToDataUrl(file, maxWidth, 0.72);
   try {
     const res = await fetch('/api/upload', {
       method: 'POST',

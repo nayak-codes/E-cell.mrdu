@@ -18,7 +18,7 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'Outfit', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
     },
   },

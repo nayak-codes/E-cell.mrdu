@@ -1,123 +1,116 @@
 import React from 'react';
-import { Building2, ExternalLink, CheckCircle } from 'lucide-react';
+import { Leaf, GraduationCap, Zap, HeartPulse } from 'lucide-react';
 
 export default function Startups({ darkMode }) {
   const startups = [
     {
       name: 'CropVision AI',
-      category: 'AgriTech AI & Remote Sensing',
-      funding: 'Seed Grant (₹25 Lakhs)',
-      description: 'Hyperspectral drone imaging platform for early agricultural pest detection and automated yield estimation.',
-      founders: 'Rahul Verma & Team (Dept of CSE, MRU)',
-      status: 'Incubated Cohort 2025',
-      badge: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/30'
+      tag: 'AgriTech',
+      grant: '₹25L seed',
+      status: 'Incubated · 2025',
+      description: 'Drones that spot crop pests early and help farmers estimate yield.',
+      founders: 'Rahul Verma · CSE',
+      icon: Leaf,
+      accent: 'from-emerald-500 to-teal-500',
+      chip: darkMode ? 'bg-emerald-500/15 text-emerald-300' : 'bg-emerald-100 text-emerald-800',
+      card: darkMode ? 'border-emerald-500/20' : 'border-emerald-100 bg-gradient-to-br from-white to-emerald-50/80',
     },
     {
       name: 'EduSphere 3D',
-      category: 'EdTech AR/VR',
-      funding: 'Incubation Grant (₹40 Lakhs)',
-      description: 'Interactive 3D virtual science lab simulations for high schools across Telangana & Andhra Pradesh.',
-      founders: 'Priya Sharma & Vikram Reddy (Dept of ECE, MRU)',
-      status: 'Commercial Pilot Phase',
-      badge: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/30'
+      tag: 'EdTech',
+      grant: '₹40L grant',
+      status: 'Pilot in schools',
+      description: '3D science labs for school students — experiments you can try on a screen.',
+      founders: 'Priya Sharma & Vikram Reddy · ECE',
+      icon: GraduationCap,
+      accent: 'from-indigo-500 to-violet-500',
+      chip: darkMode ? 'bg-indigo-500/15 text-indigo-300' : 'bg-indigo-100 text-indigo-800',
+      card: darkMode ? 'border-indigo-500/20' : 'border-indigo-100 bg-gradient-to-br from-white to-indigo-50/80',
     },
     {
-      name: 'EcoCharge Mobility',
-      category: 'CleanTech EV Systems',
-      funding: 'State Grant Winner',
-      description: 'Modular battery swapping stations and IoT charging telemetry for campus micro-mobility fleets.',
-      founders: 'Karthik Raju (Dept of EEE, MRU)',
-      status: 'Prototyping & Field Trial',
-      badge: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/30'
+      name: 'EcoCharge',
+      tag: 'CleanTech',
+      grant: 'State grant',
+      status: 'Field trial',
+      description: 'Battery swap stations for campus bikes and small EVs, tracked live on a dashboard.',
+      founders: 'Karthik Raju · EEE',
+      icon: Zap,
+      accent: 'from-amber-500 to-orange-500',
+      chip: darkMode ? 'bg-amber-500/15 text-amber-300' : 'bg-amber-100 text-amber-900',
+      card: darkMode ? 'border-amber-500/20' : 'border-amber-100 bg-gradient-to-br from-white to-amber-50/70',
     },
     {
-      name: 'PulseCare IoT',
-      category: 'HealthTech & Bio-Sensors',
-      funding: 'Patent Filing Stage',
-      description: 'Wearable non-invasive cardiac patch with cloud-based arrhythmia warning system for geriatric care.',
-      founders: 'Sanjana Patel & Team (Dept of AIML, MRU)',
-      status: 'Clinical Validation',
-      badge: 'bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/30'
-    }
+      name: 'PulseCare',
+      tag: 'HealthTech',
+      grant: 'Patent stage',
+      status: 'Validation',
+      description: 'A small wearable patch that watches heart rhythm and sends an alert if something looks off.',
+      founders: 'Sanjana Patel · AIML',
+      icon: HeartPulse,
+      accent: 'from-rose-500 to-pink-500',
+      chip: darkMode ? 'bg-rose-500/15 text-rose-300' : 'bg-rose-100 text-rose-800',
+      card: darkMode ? 'border-rose-500/20' : 'border-rose-100 bg-gradient-to-br from-white to-rose-50/80',
+    },
   ];
 
   return (
-    <section id="startups" className={`section-anchor py-20 relative transition-colors ${
-      darkMode ? 'bg-[#070b14]' : 'bg-slate-50'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest ${
-            darkMode ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400' : 'bg-blue-50 border border-blue-200 text-blue-700'
-          }`}>
-            <Building2 className="w-3.5 h-3.5" /> University Incubatees
-          </div>
-          <h2 className={`text-2xl sm:text-4xl font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-            Incubated Student <span className={darkMode ? 'text-gradient-dark' : 'text-gradient-light'}>Ventures</span>
+    <section
+      id="startups"
+      className={`section-anchor py-20 ${darkMode ? 'bg-zinc-950' : 'bg-zinc-50'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-2xl mb-12">
+          <p className="text-xs font-semibold tracking-widest uppercase text-indigo-600 mb-3">Campus startups</p>
+          <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+            Built by students.{' '}
+            <span className={darkMode ? 'text-gradient-dark' : 'text-gradient-light'}>Backed by E-CELL.</span>
           </h2>
-          <p className={`text-xs sm:text-sm ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-            Selected student-led startups receiving pre-incubation infrastructure, seed grants, and technical mentorship at Malla Reddy Deemed to be University.
+          <p className={`mt-4 text-base leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+            A few teams from MRU that we help with mentors, lab time, and seed support.
           </p>
         </div>
 
-        {/* Startups Grid */}
-        <div className="grid sm:grid-cols-2 gap-6">
-          {startups.map((startup, idx) => (
-            <div
-              key={idx}
-              className={`p-6 rounded-2xl border flex flex-col justify-between transition-all ${
-                darkMode ? 'pro-card-dark' : 'pro-card-light'
+        <div className="grid sm:grid-cols-2 gap-5">
+          {startups.map((s) => (
+            <article
+              key={s.name}
+              className={`rounded-2xl border overflow-hidden shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all ${
+                darkMode ? `pro-card-dark ${s.card}` : s.card
               }`}
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between gap-2">
-                  <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold border ${startup.badge}`}>
-                    {startup.funding}
-                  </span>
-                  <span className={`text-[10px] font-semibold uppercase tracking-wider ${
-                    darkMode ? 'text-slate-400' : 'text-slate-500'
-                  }`}>
-                    {startup.category}
-                  </span>
+              <div className={`h-1.5 bg-gradient-to-r ${s.accent}`} />
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.accent} text-white flex items-center justify-center shadow-sm`}>
+                    <s.icon className="w-5 h-5" />
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 justify-end">
+                    <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${s.chip}`}>{s.tag}</span>
+                    <span className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                      darkMode ? 'bg-white/10 text-zinc-300' : 'bg-zinc-100 text-zinc-600'
+                    }`}>
+                      {s.grant}
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className={`text-xl font-bold flex items-center gap-2 ${
-                  darkMode ? 'text-white' : 'text-slate-900'
-                }`}>
-                  {startup.name}
-                  <CheckCircle className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                  {s.name}
                 </h3>
-
-                <p className={`text-xs leading-relaxed ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-                  {startup.description}
+                <p className={`mt-2 text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                  {s.description}
                 </p>
 
-                <div className={`pt-2 border-t text-[11px] space-y-1 ${
-                  darkMode ? 'border-white/10 text-slate-400' : 'border-slate-200 text-slate-600'
+                <div className={`mt-5 pt-4 border-t flex items-center justify-between gap-3 text-xs ${
+                  darkMode ? 'border-white/10' : 'border-black/5'
                 }`}>
-                  <div><strong>Founder Team:</strong> {startup.founders}</div>
-                  <div><strong>Incubation Status:</strong> <span className="text-blue-600 dark:text-blue-300 font-bold">{startup.status}</span></div>
+                  <span className={darkMode ? 'text-zinc-400' : 'text-zinc-500'}>{s.founders}</span>
+                  <span className="font-semibold text-indigo-600 dark:text-indigo-300">{s.status}</span>
                 </div>
               </div>
-
-              <div className={`mt-4 pt-3 flex items-center justify-between border-t text-xs ${
-                darkMode ? 'border-white/5 text-slate-400' : 'border-slate-100 text-slate-500'
-              }`}>
-                <span>MRU Incubation Wing</span>
-                <button
-                  onClick={() => alert(`Viewing profile for ${startup.name}`)}
-                  className="text-blue-600 dark:text-blue-400 hover:underline text-xs font-bold flex items-center gap-1"
-                >
-                  View Profile
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
-
       </div>
     </section>
   );

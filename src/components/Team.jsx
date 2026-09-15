@@ -1,6 +1,13 @@
 import React from 'react';
-import { Users, Linkedin, Github, Mail, Award } from 'lucide-react';
+import { Linkedin, Github, Mail } from 'lucide-react';
 import { useCms } from '../context/CmsContext';
+
+const accents = [
+  'from-indigo-500 to-violet-500',
+  'from-violet-500 to-fuchsia-500',
+  'from-sky-500 to-indigo-500',
+  'from-emerald-500 to-teal-500',
+];
 
 export default function Team({ darkMode }) {
   const { cms } = useCms();
@@ -8,122 +15,124 @@ export default function Team({ darkMode }) {
   const mentors = cms.mentors || [];
 
   return (
-    <section id="team" className={`section-anchor py-20 relative transition-colors ${
-      darkMode ? 'bg-[#0b1120]' : 'bg-white'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-widest ${
-            darkMode ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400' : 'bg-blue-50 border border-blue-200 text-blue-700'
-          }`}>
-            <Users className="w-3.5 h-3.5" /> Governance & Leadership
-          </div>
-          <h2 className={`text-2xl sm:text-4xl font-extrabold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-            Student Leadership & <span className={darkMode ? 'text-gradient-dark' : 'text-gradient-light'}>Faculty Mentors</span>
+    <section
+      id="team"
+      className={`section-anchor py-20 overflow-hidden ${darkMode ? 'bg-zinc-950' : 'bg-white'}`}
+    >
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-2xl mb-12 team-fade">
+          <p className="text-xs font-semibold tracking-widest uppercase text-indigo-600 mb-3">The team</p>
+          <h2 className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+            People who run <span className={darkMode ? 'text-gradient-dark' : 'text-gradient-light'}>E-CELL</span>
           </h2>
-          <p className={`text-xs sm:text-sm ${darkMode ? 'text-slate-300' : 'text-slate-600'}`}>
-            Appointed student wing heads and faculty advisors steering the Entrepreneurship Cell at Malla Reddy Deemed to be University.
+          <p className={`mt-4 text-base leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+            Student leads who organise events and a small faculty group that guides the club.
           </p>
         </div>
 
-        {/* Student Leadership Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {leadership.map((member) => (
-            <div
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
+          {leadership.map((member, idx) => (
+            <article
               key={member.id}
-              className={`rounded-2xl p-5 border flex flex-col justify-between transition-all ${
-                darkMode ? 'pro-card-dark' : 'pro-card-light'
+              className={`team-card group rounded-2xl overflow-hidden border shadow-sm ${
+                darkMode ? 'bg-zinc-900 border-white/10' : 'bg-white border-zinc-200'
               }`}
+              style={{ animationDelay: `${idx * 90}ms` }}
             >
-              <div className="space-y-3">
-                <div className={`w-20 h-20 mx-auto rounded-xl overflow-hidden border ${
-                  darkMode ? 'border-white/10 bg-slate-800' : 'border-slate-200 bg-slate-100'
-                }`}>
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              <div className="relative h-52 overflow-hidden">
+                <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${accents[idx % accents.length]} z-10`} />
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-zinc-950/10 to-transparent opacity-80" />
+                <span className="absolute bottom-3 left-3 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide bg-white/15 text-white backdrop-blur-sm">
+                  {member.badge || member.wing || 'Lead'}
+                </span>
+              </div>
 
-                <div className="text-center">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
-                    darkMode ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400' : 'bg-blue-50 border border-blue-200 text-blue-700'
-                  }`}>
-                    {member.badge}
-                  </span>
-                  <h3 className={`text-base font-bold mt-1.5 ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                    {member.name}
-                  </h3>
-                  <p className={`text-[11px] font-semibold ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{member.role}</p>
-                </div>
-
-                <p className={`text-[11px] text-center leading-relaxed ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>
+              <div className="p-5">
+                <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                  {member.name}
+                </h3>
+                <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-300 mt-0.5">
+                  {member.role}
+                </p>
+                <p className={`text-sm leading-relaxed mt-2.5 min-h-[3.2rem] ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
                   {member.bio}
                 </p>
-              </div>
 
-              <div className={`pt-3 mt-3 border-t flex items-center justify-center gap-2 ${
-                darkMode ? 'border-white/10 text-slate-400' : 'border-slate-200 text-slate-500'
-              }`}>
-                {(member.linkedin || member.github || member.email) ? (
-                  <>
-                    {member.linkedin && (
-                      <a href={member.linkedin} target="_blank" rel="noreferrer" className="p-1.5 rounded-lg hover:text-blue-600 transition-colors">
-                        <Linkedin className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-                    {member.github && (
-                      <a href={member.github} target="_blank" rel="noreferrer" className="p-1.5 rounded-lg hover:text-blue-600 transition-colors">
-                        <Github className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-                    {member.email && (
-                      <a href={`mailto:${member.email}`} className="p-1.5 rounded-lg hover:text-blue-600 transition-colors">
-                        <Mail className="w-3.5 h-3.5" />
-                      </a>
-                    )}
-                  </>
-                ) : (
-                  <span className="text-[10px]">{member.wing}</span>
-                )}
+                <div className="mt-4 flex items-center gap-2">
+                  {member.linkedin && (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`p-2 rounded-lg transition-all duration-300 hover:-translate-y-0.5 ${
+                        darkMode ? 'bg-white/5 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-600 hover:bg-indigo-600 hover:text-white'
+                      }`}
+                    >
+                      <Linkedin className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  {member.github && (
+                    <a
+                      href={member.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`p-2 rounded-lg transition-all duration-300 hover:-translate-y-0.5 ${
+                        darkMode ? 'bg-white/5 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-900 hover:text-white'
+                      }`}
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  {member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className={`p-2 rounded-lg transition-all duration-300 hover:-translate-y-0.5 ${
+                        darkMode ? 'bg-white/5 text-zinc-300 hover:text-white' : 'bg-zinc-100 text-zinc-600 hover:bg-indigo-600 hover:text-white'
+                      }`}
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                    </a>
+                  )}
+                  {!member.linkedin && !member.github && !member.email && (
+                    <span className={`text-[11px] ${darkMode ? 'text-zinc-500' : 'text-zinc-400'}`}>{member.wing}</span>
+                  )}
+                </div>
               </div>
-
-            </div>
+            </article>
           ))}
         </div>
 
-        {/* Faculty Advisory Row */}
-        <div className={`p-6 rounded-2xl border ${
-          darkMode ? 'pro-card-dark' : 'pro-card-light'
-        }`}>
-          <div className="flex items-center gap-3 mb-6">
-            <Award className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            <div>
-              <h3 className={`text-base font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>
-                Faculty Advisory Board & University Mentors
-              </h3>
-              <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>
-                Providing institutional oversight, policy guidelines, and patent grant approvals.
-              </p>
-            </div>
-          </div>
-
+        <div>
+          <h3 className={`text-lg font-bold mb-1 ${darkMode ? 'text-white' : 'text-zinc-900'}`}>Faculty mentors</h3>
+          <p className={`text-sm mb-6 ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+            Faculty who advise the club on programs and student ventures.
+          </p>
           <div className="grid md:grid-cols-3 gap-4">
-            {mentors.map((m) => (
-              <div key={m.id} className={`p-4 rounded-xl border ${
-                darkMode ? 'bg-white/[0.02] border-white/5' : 'bg-slate-50 border-slate-200'
-              }`}>
-                <h4 className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-slate-900'}`}>{m.name}</h4>
-                <p className="text-xs text-blue-600 dark:text-blue-400 font-semibold mt-0.5">{m.role}</p>
-                <p className={`text-[11px] mt-1 ${darkMode ? 'text-slate-400' : 'text-slate-500'}`}>{m.dept}</p>
-              </div>
+            {mentors.map((m, idx) => (
+              <article
+                key={m.id}
+                className={`team-card p-5 rounded-2xl border flex gap-4 items-start ${
+                  darkMode ? 'bg-zinc-900 border-white/10' : 'bg-zinc-50 border-zinc-200'
+                }`}
+                style={{ animationDelay: `${280 + idx * 90}ms` }}
+              >
+                <div className={`w-12 h-12 rounded-xl shrink-0 bg-gradient-to-br ${accents[idx % accents.length]} text-white flex items-center justify-center font-bold text-sm shadow-sm`}>
+                  {(m.name || 'M').split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('')}
+                </div>
+                <div>
+                  <h4 className={`text-sm font-bold ${darkMode ? 'text-white' : 'text-zinc-900'}`}>{m.name}</h4>
+                  <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-300 mt-0.5">{m.role}</p>
+                  <p className={`text-xs mt-1 ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{m.dept}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

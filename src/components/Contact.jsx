@@ -37,7 +37,7 @@ export default function Contact({ darkMode }) {
 
   return (
     <section id="contact" className={`section-anchor py-20 relative transition-colors ${
-      darkMode ? 'bg-[#070b14]' : 'bg-slate-100/80'
+      darkMode ? 'bg-zinc-900/40' : 'bg-zinc-50'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
@@ -195,22 +195,21 @@ export default function Contact({ darkMode }) {
         }`}>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold">
+              <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center">
                 <Building2 className="w-4 h-4" />
               </div>
               <div>
-                <span className={`font-bold block ${darkMode ? 'text-white' : 'text-slate-900'}`}>Malla Reddy Deemed to be University</span>
-                <span className="text-[11px]">Entrepreneurship Cell • Official Web Portal</span>
+                <span className={`font-bold block ${darkMode ? 'text-white' : 'text-zinc-900'}`}>E-CELL</span>
+                <span className="text-[11px]">Malla Reddy University · student entrepreneurship club</span>
               </div>
             </div>
 
             <div className="flex items-center gap-6 text-[11px] font-semibold">
-              <a href="#about" className="hover:text-blue-600 transition-colors">About Council</a>
-              <a href="#wings" className="hover:text-blue-600 transition-colors">Incubation Wings</a>
-              <a href="#events" className="hover:text-blue-600 transition-colors">Events & Summits</a>
-              <a href="#team" className="hover:text-blue-600 transition-colors">Governance</a>
-              <a href="https://mallareddyuniversity.ac.in" target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors flex items-center gap-1">
-                Main University Site <ExternalLink className="w-3 h-3" />
+              <a href="#about" className="hover:text-indigo-600 transition-colors">About</a>
+              <a href="#events" className="hover:text-indigo-600 transition-colors">Events</a>
+              <a href="#team" className="hover:text-indigo-600 transition-colors">Team</a>
+              <a href="https://mallareddyuniversity.ac.in" target="_blank" rel="noreferrer" className="hover:text-indigo-600 transition-colors flex items-center gap-1">
+                University site <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>
@@ -218,7 +217,7 @@ export default function Contact({ darkMode }) {
           <div className={`pt-4 border-t flex flex-col sm:flex-row items-center justify-between gap-2 text-[10px] ${
             darkMode ? 'border-white/5 text-slate-500' : 'border-slate-200 text-slate-500'
           }`}>
-            <p>© 2026 Malla Reddy Deemed to be University. All Rights Reserved. Approved under MIC & UGC guidelines.</p>
+            <p>© 2026 E-CELL, Malla Reddy University.</p>
             <button
               type="button"
               onClick={() => navigateTo('/admin')}

@@ -22,7 +22,7 @@ function Home({ darkMode, setDarkMode }) {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 font-sans ${
-      darkMode ? 'bg-[#0b1120] text-slate-100' : 'bg-slate-50 text-slate-900'
+      darkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-white text-zinc-900'
     }`}>
       <Navbar
         darkMode={darkMode}

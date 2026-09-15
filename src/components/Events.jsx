@@ -28,7 +28,7 @@ export default function Events({ darkMode }) {
 
   return (
     <section id="events" className={`section-anchor py-20 relative transition-colors ${
-      darkMode ? 'bg-[#070b14]' : 'bg-slate-50'
+      darkMode ? 'bg-zinc-900/40' : 'bg-zinc-50'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

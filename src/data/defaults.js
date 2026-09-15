@@ -256,6 +256,7 @@ export const defaultMentors = [
 ];
 
 export const defaultCms = {
+  updatedAt: Date.now(),
   announcements: defaultAnnouncements,
   events: defaultEvents,
   gallery: defaultGallery,

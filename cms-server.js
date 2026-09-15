@@ -75,7 +75,8 @@ export function createCmsMiddleware(root) {
       if (!isAdmin(req)) return send(res, 401, { error: 'Unauthorized' });
       try {
         const data = JSON.parse((await readBody(req)).toString('utf8'));
-        writeCms(root, data);
+        const dataWithTimestamp = { ...data, updatedAt: Date.now() };
+        writeCms(root, dataWithTimestamp);
         return send(res, 200, { ok: true });
       } catch {
         return send(res, 400, { error: 'Invalid CMS payload' });

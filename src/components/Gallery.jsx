@@ -77,7 +77,7 @@ export default function Gallery({ darkMode }) {
 
   return (
     <section id="gallery" className={`section-anchor py-20 relative transition-colors ${
-      darkMode ? 'bg-[#0b1120]' : 'bg-white'
+      darkMode ? 'bg-zinc-950' : 'bg-white'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
