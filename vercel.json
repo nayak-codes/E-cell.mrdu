@@ -2,7 +2,8 @@
   "buildCommand": "npx vite build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "public": "public",
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|uploads/).*)", "destination": "/index.html" }
   ]
 }
