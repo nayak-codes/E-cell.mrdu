@@ -31,16 +31,18 @@ export function CmsProvider({ children }) {
     const refresh = async () => {
       if (savingRef.current) return;
       try {
-        const live = await fetchCms();
-        if (!cancelled && !savingRef.current) apply(live);
+        // Only try to fetch if we're in dev mode with API available
+        if (import.meta.env.DEV) {
+          const live = await fetchCms();
+          if (!cancelled && !savingRef.current) apply(live);
+        }
       } catch (err) {
-        console.log('CMS fetch failed, using local data:', err.message);
+        console.log('CMS API unavailable, using local data');
         /* keep current content if API is down */
       }
     };
 
-    // Initial load with delay to ensure state is set
-    setTimeout(refresh, 100);
+    refresh();
     const timer = setInterval(refresh, 3000);
     window.addEventListener('focus', refresh);
 

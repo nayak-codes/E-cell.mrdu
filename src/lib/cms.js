@@ -54,16 +54,20 @@ export function saveCms(data) {
 }
 
 export async function fetchCms() {
-  const res = await fetch('/api/cms', { cache: 'no-store' });
-  if (!res.ok) throw new Error('Could not load live content');
-  const type = res.headers.get('content-type') || '';
-  if (!type.includes('application/json')) throw new Error('Not JSON');
-  const parsed = await res.json();
-  if (!isLikelyCms(parsed)) throw new Error('Invalid CMS payload');
-  return normalizeCms(parsed);
+  // In production, we don't have a backend API
+  // The app will use localStorage and defaults instead
+  throw new Error('CMS API not available in production');
 }
 
 export async function publishCms(data) {
+  // In production, we only store locally
+  if (import.meta.env.PROD) {
+    console.log('Production mode: saving locally only');
+    saveCms(data);
+    return;
+  }
+  
+  // In dev, try to publish to server
   const res = await fetch('/api/cms', {
     method: 'PUT',
     headers: {
