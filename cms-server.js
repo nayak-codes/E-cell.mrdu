@@ -122,7 +122,7 @@ function installCms(server) {
 export default function cmsPlugin() {
   return {
     name: 'mru-ecell-cms',
-    configureServer(installCms),
-    configurePreviewServer(installCms),
+    configureServer: installCms,
+    configurePreviewServer: installCms,
   };
 }
