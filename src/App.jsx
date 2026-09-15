@@ -13,6 +13,40 @@ import Admin from './pages/Admin';
 import AdminLogin from './pages/AdminLogin';
 import { isAdminLoggedIn } from './lib/auth';
 
+// Error boundary
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    console.error('React Error:', error);
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.error('Error details:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '20px', textAlign: 'center', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div>
+            <h1>Something went wrong</h1>
+            <p>Check browser console for details</p>
+            <pre style={{ textAlign: 'left', background: '#f0f0f0', padding: '10px', overflowX: 'auto' }}>
+              Open DevTools (F12) to see errors
+            </pre>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 function currentPath() {
   return window.location.pathname.replace(/\/+$/, '') || '/';
 }
@@ -70,16 +104,18 @@ export default function App() {
   const isAdmin = path === '/admin';
 
   return (
-    <CmsProvider>
-      {isAdmin ? (
-        authed ? (
-          <Admin />
+    <ErrorBoundary>
+      <CmsProvider>
+        {isAdmin ? (
+          authed ? (
+            <Admin />
+          ) : (
+            <AdminLogin onSuccess={() => setAuthed(true)} />
+          )
         ) : (
-          <AdminLogin onSuccess={() => setAuthed(true)} />
-        )
-      ) : (
-        <Home darkMode={darkMode} setDarkMode={setDarkMode} />
-      )}
-    </CmsProvider>
+          <Home darkMode={darkMode} setDarkMode={setDarkMode} />
+        )}
+      </CmsProvider>
+    </ErrorBoundary>
   );
 }

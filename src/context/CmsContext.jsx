@@ -31,13 +31,11 @@ export function CmsProvider({ children }) {
     const refresh = async () => {
       if (savingRef.current) return;
       try {
-        // Only try to fetch if we're in dev mode with API available
-        if (import.meta.env.DEV) {
-          const live = await fetchCms();
-          if (!cancelled && !savingRef.current) apply(live);
-        }
+        // Try to fetch from API (works in dev and production with serverless)
+        const live = await fetchCms();
+        if (!cancelled && !savingRef.current) apply(live);
       } catch (err) {
-        console.log('CMS API unavailable, using local data');
+        console.log('CMS fetch failed, using local/default data');
         /* keep current content if API is down */
       }
     };

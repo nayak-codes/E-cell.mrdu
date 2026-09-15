@@ -54,29 +54,38 @@ export function saveCms(data) {
 }
 
 export async function fetchCms() {
-  // In production, we don't have a backend API
-  // The app will use localStorage and defaults instead
-  throw new Error('CMS API not available in production');
+  try {
+    const res = await fetch('/api/cms', { cache: 'no-store' });
+    if (!res.ok) throw new Error('Could not load live content');
+    const type = res.headers.get('content-type') || '';
+    if (!type.includes('application/json')) throw new Error('Not JSON');
+    const parsed = await res.json();
+    if (!isLikelyCms(parsed)) throw new Error('Invalid CMS payload');
+    return normalizeCms(parsed);
+  } catch (err) {
+    console.log('CMS API not available, using local data:', err.message);
+    throw err;
+  }
 }
 
 export async function publishCms(data) {
-  // In production, we only store locally
-  if (import.meta.env.PROD) {
-    console.log('Production mode: saving locally only');
+  try {
+    const res = await fetch('/api/cms', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-key': ADMIN_PASSWORD,
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error('Could not publish to the website');
+    console.log('CMS published successfully');
+  } catch (err) {
+    console.error('Publish error:', err);
+    // Still save locally as fallback
     saveCms(data);
-    return;
+    throw err;
   }
-  
-  // In dev, try to publish to server
-  const res = await fetch('/api/cms', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-admin-key': ADMIN_PASSWORD,
-    },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error('Could not publish to the website');
 }
 
 export function broadcastCms(data) {
