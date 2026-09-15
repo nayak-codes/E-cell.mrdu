@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sparkles, Sun, Moon } from 'lucide-react';
 import { useCms } from '../context/CmsContext';
-import logoImage from '../../assets/site logo.png';
 
 export default function Navbar({ darkMode, onToggleTheme, onOpenPitchModal }) {
   const { cms } = useCms();
@@ -61,7 +60,7 @@ export default function Navbar({ darkMode, onToggleTheme, onOpenPitchModal }) {
         <div className="max-w-6xl mx-auto px-4">
           <div className="h-16 flex items-center justify-between gap-4">
             <a href="#" className="flex items-center gap-2.5">
-              <img src={logoImage} alt="E-Cell Logo" className="w-9 h-9 object-contain" />
+              <img src="/site-logo.png" alt="E-Cell Logo" className="w-9 h-9 object-contain" />
               <div className="leading-tight">
                 <p className={`text-[15px] font-bold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
                   E-CELL

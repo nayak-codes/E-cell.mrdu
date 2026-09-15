@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, ChevronDown, Send, CheckCircle2, Building2, ExternalLink } from 'lucide-react';
 import { navigateTo } from '../lib/cms';
-import logoImage from '../../assets/site logo.png';
 
 export default function Contact({ darkMode }) {
   const [openFaq, setOpenFaq] = useState(0);
@@ -198,7 +197,7 @@ export default function Contact({ darkMode }) {
             {/* Brand Section */}
             <div className="space-y-3">
               <div className="flex items-center gap-2">
-                <img src={logoImage} alt="E-Cell Logo" className="w-8 h-8 object-contain" />
+                <img src="/site-logo.png" alt="E-Cell Logo" className="w-8 h-8 object-contain" />
                 <div>
                   <h4 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-zinc-900'}`}>E-CELL</h4>
                   <p className={`text-xs ${darkMode ? 'text-slate-400' : 'text-slate-600'}`}>Student entrepreneurship club</p>
