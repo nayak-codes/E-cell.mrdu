@@ -8,11 +8,12 @@ import {
   resetCms as resetStored,
   saveCms,
 } from '../lib/cms';
+import { defaultCms } from '../data/defaults';
 
 const CmsContext = createContext(null);
 
 export function CmsProvider({ children }) {
-  const [cms, setCms] = useState(() => loadCms());
+  const [cms, setCms] = useState(() => loadCms() || structuredClone(defaultCms));
   const savingRef = useRef(false);
 
   const apply = useCallback((next) => {
@@ -32,12 +33,14 @@ export function CmsProvider({ children }) {
       try {
         const live = await fetchCms();
         if (!cancelled && !savingRef.current) apply(live);
-      } catch {
+      } catch (err) {
+        console.log('CMS fetch failed, using local data:', err.message);
         /* keep current content if API is down */
       }
     };
 
-    refresh();
+    // Initial load with delay to ensure state is set
+    setTimeout(refresh, 100);
     const timer = setInterval(refresh, 3000);
     window.addEventListener('focus', refresh);
 

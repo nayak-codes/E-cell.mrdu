@@ -28,11 +28,15 @@ export function pickNewer(a, b) {
 export function loadCms() {
   try {
     const raw = localStorage.getItem(CMS_KEY);
-    if (!raw) return null;
+    if (!raw) {
+      console.log('No cached CMS data, using defaults');
+      return structuredClone(defaultCms);
+    }
     const parsed = JSON.parse(raw);
-    return isLikelyCms(parsed) ? normalizeCms(parsed) : null;
-  } catch {
-    return null;
+    return isLikelyCms(parsed) ? normalizeCms(parsed) : structuredClone(defaultCms);
+  } catch (err) {
+    console.error('Error loading CMS:', err);
+    return structuredClone(defaultCms);
   }
 }
 
