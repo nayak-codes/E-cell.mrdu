@@ -1,19 +1,24 @@
 import { defaultCms } from '../data/defaults';
+import { ADMIN_PASSWORD } from './auth';
 
 export const CMS_KEY = 'mru-ecell-cms-v1';
+export const CMS_CHANNEL = 'mru-ecell-cms';
+
+export function normalizeCms(parsed) {
+  return {
+    announcements: Array.isArray(parsed?.announcements) ? parsed.announcements : defaultCms.announcements,
+    events: Array.isArray(parsed?.events) ? parsed.events : defaultCms.events,
+    gallery: Array.isArray(parsed?.gallery) ? parsed.gallery : defaultCms.gallery,
+    team: Array.isArray(parsed?.team) ? parsed.team : defaultCms.team,
+    mentors: Array.isArray(parsed?.mentors) ? parsed.mentors : defaultCms.mentors,
+  };
+}
 
 export function loadCms() {
   try {
     const raw = localStorage.getItem(CMS_KEY);
     if (!raw) return structuredClone(defaultCms);
-    const parsed = JSON.parse(raw);
-    return {
-      announcements: parsed.announcements?.length ? parsed.announcements : defaultCms.announcements,
-      events: Array.isArray(parsed.events) ? parsed.events : defaultCms.events,
-      gallery: Array.isArray(parsed.gallery) ? parsed.gallery : defaultCms.gallery,
-      team: Array.isArray(parsed.team) ? parsed.team : defaultCms.team,
-      mentors: Array.isArray(parsed.mentors) ? parsed.mentors : defaultCms.mentors,
-    };
+    return normalizeCms(JSON.parse(raw));
   } catch {
     return structuredClone(defaultCms);
   }
@@ -23,9 +28,58 @@ export function saveCms(data) {
   localStorage.setItem(CMS_KEY, JSON.stringify(data));
 }
 
+export async function fetchCms() {
+  const res = await fetch('/api/cms', { cache: 'no-store' });
+  if (!res.ok) throw new Error('Could not load live content');
+  return normalizeCms(await res.json());
+}
+
+export async function publishCms(data) {
+  const res = await fetch('/api/cms', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-admin-key': ADMIN_PASSWORD,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Could not publish to the website');
+}
+
+export function broadcastCms(data) {
+  try {
+    const channel = new BroadcastChannel(CMS_CHANNEL);
+    channel.postMessage(data);
+    channel.close();
+  } catch {
+    /* ignore */
+  }
+}
+
 export function resetCms() {
   localStorage.removeItem(CMS_KEY);
   return structuredClone(defaultCms);
+}
+
+export async function uploadImageFile(file, maxWidth = 1400) {
+  const dataUrl = await fileToDataUrl(file, maxWidth);
+  try {
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-admin-key': ADMIN_PASSWORD,
+      },
+      body: JSON.stringify({ name: file.name, dataUrl }),
+    });
+    if (res.ok) {
+      const payload = await res.json();
+      if (payload.url) return payload.url;
+    }
+  } catch {
+    /* fall through to data URL if API is unavailable */
+  }
+  return dataUrl;
 }
 
 export function nextId(list) {

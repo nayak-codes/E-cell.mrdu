@@ -1,21 +1,82 @@
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
-import { loadCms, saveCms, resetCms as resetStored } from '../lib/cms';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  broadcastCms,
+  CMS_CHANNEL,
+  fetchCms,
+  loadCms,
+  publishCms,
+  resetCms as resetStored,
+  saveCms,
+} from '../lib/cms';
 
 const CmsContext = createContext(null);
 
 export function CmsProvider({ children }) {
   const [cms, setCms] = useState(() => loadCms());
+  const savingRef = useRef(false);
+
+  const apply = useCallback((next) => {
+    setCms(next);
+    try {
+      saveCms(next);
+    } catch {
+      /* ignore quota — live API is the source of truth */
+    }
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const refresh = async () => {
+      if (savingRef.current) return;
+      try {
+        const live = await fetchCms();
+        if (!cancelled && !savingRef.current) apply(live);
+      } catch {
+        /* keep current content if API is down */
+      }
+    };
+
+    refresh();
+    const timer = setInterval(refresh, 3000);
+    window.addEventListener('focus', refresh);
+
+    let channel;
+    try {
+      channel = new BroadcastChannel(CMS_CHANNEL);
+      channel.onmessage = (event) => {
+        if (event.data) apply(event.data);
+      };
+    } catch {
+      /* ignore */
+    }
+
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+      window.removeEventListener('focus', refresh);
+      channel?.close();
+    };
+  }, [apply]);
 
   const persist = useCallback((updater) => {
     setCms((prev) => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
       try {
         saveCms(next);
-      } catch (err) {
-        console.error(err);
-        alert('Could not save. Images may be too large for this browser. Try a smaller photo.');
-        return prev;
+      } catch {
+        /* still publish even if this browser cannot store the backup */
       }
+      savingRef.current = true;
+      broadcastCms(next);
+      publishCms(next)
+        .catch((err) => {
+          console.error(err);
+          alert('Could not publish to the website. Make sure npm run dev is running, then save again.');
+        })
+        .finally(() => {
+          savingRef.current = false;
+        });
       return next;
     });
   }, []);

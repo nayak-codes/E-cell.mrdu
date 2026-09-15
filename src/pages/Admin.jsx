@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useCms } from '../context/CmsContext';
 import { logoutAdmin } from '../lib/auth';
-import { fileToDataUrl, galleryBadgeColor, navigateTo, nextId } from '../lib/cms';
+import { galleryBadgeColor, navigateTo, nextId, uploadImageFile } from '../lib/cms';
 import { defaultCms } from '../data/defaults';
 
 const TABS = [
@@ -73,7 +73,7 @@ export default function Admin() {
 
   const flash = (msg) => {
     setNotice(msg);
-    setTimeout(() => setNotice(''), 2200);
+    setTimeout(() => setNotice(''), 2800);
   };
 
   const stats = useMemo(
@@ -97,7 +97,7 @@ export default function Admin() {
       .map((line) => line.trim())
       .filter(Boolean);
     setAnnouncements(lines);
-    flash('Announcements updated');
+    flash('Announcements published to the website');
   };
 
   return (
@@ -349,7 +349,7 @@ export default function Admin() {
                 setEvents([{ ...eventForm, id: nextId(cms.events) }, ...cms.events]);
               }
               setEventForm(null);
-              flash('Event saved');
+              flash('Event published to the website');
             }}
           />
         </Modal>
@@ -368,7 +368,7 @@ export default function Admin() {
                 setTeam([{ ...memberForm, id: nextId(cms.team) }, ...cms.team]);
               }
               setMemberForm(null);
-              flash('Team member saved');
+              flash('Team member published to the website');
             }}
           />
         </Modal>
@@ -392,7 +392,7 @@ export default function Admin() {
                 setMentors([...cms.mentors, { ...mentorForm, id: nextId(cms.mentors) }]);
               }
               setMentorForm(null);
-              flash('Mentor saved');
+              flash('Mentor published to the website');
             }}
           />
         </Modal>
@@ -416,7 +416,7 @@ export default function Admin() {
                 setGallery([{ ...payload, id: nextId(cms.gallery) }, ...cms.gallery]);
               }
               setPhotoForm(null);
-              flash('Photo saved');
+              flash('Photo published to the website');
             }}
           />
         </Modal>
@@ -515,8 +515,8 @@ function ImagePicker({ label, value, onChange, maxWidth }) {
     if (!file) return;
     setBusy(true);
     try {
-      const dataUrl = await fileToDataUrl(file, maxWidth);
-      onChange(dataUrl);
+      const url = await uploadImageFile(file, maxWidth);
+      onChange(url);
     } catch (err) {
       alert(err.message);
     } finally {

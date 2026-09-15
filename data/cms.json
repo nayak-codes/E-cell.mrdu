@@ -1,0 +1,249 @@
+{
+  "announcements": [
+    "new event  : tueop fn jjdpfdfm hfdf fdnf jhdfni dhdnfb dfdmf",
+    "new event  : tueop fn jjdpfdfm hfdf fdnf jhdfni dhdnfb dfdmf",
+    "new event  : tueop fn jjdpfdfm hfdf fdnf jhdfni dhdnfb dfdmf"
+  ],
+  "events": [
+    {
+      "id": 1,
+      "category": "E-Summit",
+      "title": "Annual National E-Summit 2026",
+      "date": "October 24 – 25, 2026",
+      "time": "09:30 AM IST",
+      "venue": "Main University Auditorium, MRU Campus",
+      "status": "REGISTRATION OPEN",
+      "description": "The flagship national entrepreneurship summit of Malla Reddy Deemed to be University, featuring founder keynotes, venture panels, and a ₹2,50,000 seed-grant prize pool.",
+      "organizer": "MRU E-Cell & Incubation Board",
+      "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": 2,
+      "category": "Hackathons",
+      "title": "Campus Innovation 36-Hour Hackathon",
+      "date": "November 14 – 15, 2026",
+      "time": "10:00 AM IST",
+      "venue": "MRU Center of Excellence & Labs",
+      "status": "UPCOMING",
+      "description": "Inter-departmental hackathon for AI, web, and IoT prototypes. Top three teams receive incubation entry and patent-filing support.",
+      "organizer": "Technical Wing & CSE Department",
+      "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": 3,
+      "category": "Workshops",
+      "title": "IPR & Patent Filing Seminar",
+      "date": "September 28, 2026",
+      "time": "02:00 PM IST",
+      "venue": "Seminar Hall 2, Block A",
+      "status": "SEATS LIMITED",
+      "description": "Workshop on protecting student inventions, drafting patent claims, and accessing university patent-filing subsidies.",
+      "organizer": "IPR Cell & R&D Division",
+      "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+    },
+    {
+      "id": 4,
+      "category": "Investor Pitch",
+      "title": "MRU Angel Pitch Screening",
+      "date": "December 08, 2026",
+      "time": "04:00 PM IST",
+      "venue": "Executive Board Room",
+      "status": "APPLICATIONS OPEN",
+      "description": "Screening of shortlisted student startups before regional angel networks and T-Hub incubation mentors.",
+      "organizer": "Incubation & Venture Wing",
+      "image": "https://images.unsplash.com/photo-1559523161-0fc0d8b814ac?auto=format&fit=crop&w=1200&q=80"
+    }
+  ],
+  "gallery": [
+    {
+      "id": 1,
+      "type": "photo",
+      "featured": true,
+      "category": "E-Summit 2026",
+      "eventBadge": "UPCOMING",
+      "eventBadgeColor": "bg-blue-600",
+      "title": "Annual National E-Summit 2026",
+      "description": "Flagship national entrepreneurship summit at MRU.",
+      "url": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1200&q=80",
+      "date": "Oct 24–25, 2026"
+    },
+    {
+      "id": 2,
+      "type": "photo",
+      "featured": false,
+      "category": "E-Summit 2026",
+      "eventBadge": "UPCOMING",
+      "eventBadgeColor": "bg-blue-600",
+      "title": "Keynote Speakers & Panel Discussions",
+      "description": "Industry leaders on scaling startups and emerging technology.",
+      "url": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1200&q=80",
+      "date": "Oct 24–25, 2026"
+    },
+    {
+      "id": 3,
+      "type": "photo",
+      "featured": true,
+      "category": "Hackathon 2026",
+      "eventBadge": "UPCOMING",
+      "eventBadgeColor": "bg-emerald-600",
+      "title": "Campus Innovation 36-Hour Hackathon",
+      "description": "AI, web, and IoT prototypes with incubation for top teams.",
+      "url": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80",
+      "date": "Nov 14–15, 2026"
+    },
+    {
+      "id": 4,
+      "type": "photo",
+      "featured": false,
+      "category": "Hackathon 2026",
+      "eventBadge": "UPCOMING",
+      "eventBadgeColor": "bg-emerald-600",
+      "title": "Final Pitch Round — Shortlisted Teams",
+      "description": "Student founders presenting to faculty and investor mentors.",
+      "url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80",
+      "date": "Nov 15, 2026"
+    },
+    {
+      "id": 5,
+      "type": "photo",
+      "featured": true,
+      "category": "Workshop",
+      "eventBadge": "SEATS LIMITED",
+      "eventBadgeColor": "bg-purple-600",
+      "title": "IPR & Patent Drafting Seminar",
+      "description": "Hands-on session on patent claims and university filing support.",
+      "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+      "date": "Sep 28, 2026"
+    },
+    {
+      "id": 6,
+      "type": "photo",
+      "featured": false,
+      "category": "Workshop",
+      "eventBadge": "SEATS LIMITED",
+      "eventBadgeColor": "bg-purple-600",
+      "title": "Patent Drafting Masterclass",
+      "description": "Live demonstration of provisional and complete specifications.",
+      "url": "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=1200&q=80",
+      "date": "Sep 28, 2026"
+    },
+    {
+      "id": 7,
+      "type": "photo",
+      "featured": true,
+      "category": "Investor Pitch",
+      "eventBadge": "APPLICATIONS OPEN",
+      "eventBadgeColor": "bg-amber-600",
+      "title": "MRU Angel Pitch Screening",
+      "description": "Pitch evaluation with regional angel networks and T-Hub mentors.",
+      "url": "https://images.unsplash.com/photo-1559523161-0fc0d8b814ac?auto=format&fit=crop&w=1200&q=80",
+      "date": "Dec 08, 2026"
+    },
+    {
+      "id": 8,
+      "type": "photo",
+      "featured": false,
+      "category": "Incubation",
+      "eventBadge": "COMPLETED",
+      "eventBadgeColor": "bg-slate-600",
+      "title": "Seed Grant Award Handover",
+      "description": "Seed grant awarded to a student AgriTech team at the Incubation Centre.",
+      "url": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80",
+      "date": "May 2025"
+    },
+    {
+      "id": 9,
+      "type": "photo",
+      "featured": false,
+      "category": "Incubation",
+      "eventBadge": "COMPLETED",
+      "eventBadgeColor": "bg-slate-600",
+      "title": "Pre-Incubation Cohort 2026–27 Launch",
+      "description": "Applications opened for aspiring student founders.",
+      "url": "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=1200&q=80",
+      "date": "Sep 2026"
+    },
+    {
+      "id": 10,
+      "type": "photo",
+      "featured": false,
+      "category": "Guest Lectures",
+      "eventBadge": "COMPLETED",
+      "eventBadgeColor": "bg-slate-600",
+      "title": "Startup Ecosystem Masterclass",
+      "description": "Guest session on product-market fit and fundraising.",
+      "url": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80",
+      "date": "Aug 2026"
+    }
+  ],
+  "team": [
+    {
+      "id": 1,
+      "name": "Technical Lead",
+      "role": "Head of Digital Platforms & Engineering",
+      "wing": "Technical & Development Wing",
+      "badge": "TECHNICAL LEAD",
+      "image": "/uploads/1789446295025-r6fy36.jpg",
+      "bio": "Oversees software architecture, technical hackathons, and student developer teams.",
+      "linkedin": "",
+      "github": "",
+      "email": "ecell@mallareddyuniversity.ac.in"
+    },
+    {
+      "id": 2,
+      "name": "Student President",
+      "role": "Executive Head, Student E-Cell Council",
+      "wing": "Executive Leadership",
+      "badge": "STUDENT PRESIDENT",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      "bio": "Coordinates E-Cell activities, university partnerships, and national summit execution.",
+      "linkedin": "",
+      "github": "",
+      "email": ""
+    },
+    {
+      "id": 3,
+      "name": "Vice President",
+      "role": "Head of Startup Incubation",
+      "wing": "Incubation Wing",
+      "badge": "VICE PRESIDENT",
+      "image": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80",
+      "bio": "Manages cohort onboarding, seed-grant processing, and mentor matching.",
+      "linkedin": "",
+      "github": "",
+      "email": ""
+    },
+    {
+      "id": 4,
+      "name": "Head of Operations",
+      "role": "Manager, Campus Events & Logistics",
+      "wing": "Operations Division",
+      "badge": "OPERATIONS LEAD",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+      "bio": "Coordinates venues, speaker hospitality, hackathon logistics, and outreach.",
+      "linkedin": "",
+      "github": "",
+      "email": ""
+    }
+  ],
+  "mentors": [
+    {
+      "id": 1,
+      "name": "Dean of R&D & Incubation",
+      "role": "Chairperson, Institution Innovation Council (IIC)",
+      "dept": "Malla Reddy Deemed to be University"
+    },
+    {
+      "id": 2,
+      "name": "Faculty Coordinator, E-Cell",
+      "role": "Associate Professor, Department of CSE",
+      "dept": "Faculty Advisor & Patent Cell Mentor"
+    },
+    {
+      "id": 3,
+      "name": "Industry Advisory Partner",
+      "role": "Regional Director, Angel Investor Network",
+      "dept": "External Industry Mentor"
+    }
+  ]
+}
