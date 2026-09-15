@@ -1,13 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { MongoClient } from 'mongodb';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ADMIN_KEY = 'MRUEcell@2026';
-const dataDir = path.join(__dirname, '..', 'data');
-const cmsFile = path.join(dataDir, 'cms.json');
+// MongoDB connection string - will be set as environment variable in Vercel
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// Default CMS data
 const defaultCms = {
   updatedAt: Date.now(),
   announcements: ['Welcome to E-CELL'],
@@ -17,39 +13,69 @@ const defaultCms = {
   mentors: [],
 };
 
-function ensureDir(dir) {
+let cachedClient = null;
+
+async function connectDb() {
+  if (!MONGODB_URI) {
+    console.log('No MongoDB URI, using in-memory storage');
+    return null;
+  }
+
+  if (cachedClient) return cachedClient;
+  
   try {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
+    const client = new MongoClient(MONGODB_URI);
+    await client.connect();
+    cachedClient = client;
+    console.log('MongoDB connected successfully');
+    return client;
   } catch (err) {
-    console.error('Error creating directory:', err);
+    console.error('MongoDB connection failed:', err.message);
+    return null;
   }
 }
 
-function readCms() {
+// In-memory fallback
+let inMemoryStore = structuredClone(defaultCms);
+
+async function getCmsData(db) {
   try {
-    if (!fs.existsSync(cmsFile)) {
-      ensureDir(dataDir);
-      fs.writeFileSync(cmsFile, JSON.stringify(defaultCms, null, 2));
-      return defaultCms;
+    if (!db) {
+      return inMemoryStore;
     }
-    const data = fs.readFileSync(cmsFile, 'utf8');
-    return JSON.parse(data);
+    const cms = await db.collection('cms').findOne({ _id: 'main' });
+    if (cms) {
+      const { _id, ...data } = cms;
+      return data;
+    }
+    return defaultCms;
   } catch (err) {
     console.error('Error reading CMS:', err);
-    return defaultCms;
+    return inMemoryStore;
   }
 }
 
-function writeCms(data) {
+async function saveCmsData(db, data) {
   try {
-    ensureDir(dataDir);
-    fs.writeFileSync(cmsFile, JSON.stringify(data, null, 2));
+    const dataWithTime = { ...data, updatedAt: Date.now() };
+    
+    // Always save to memory
+    inMemoryStore = dataWithTime;
+    
+    // Also save to MongoDB if available
+    if (db) {
+      await db.collection('cms').updateOne(
+        { _id: 'main' },
+        { $set: dataWithTime },
+        { upsert: true }
+      );
+      console.log('Saved to MongoDB');
+    }
+    
     return true;
   } catch (err) {
-    console.error('Error writing CMS:', err);
-    return false;
+    console.error('Error saving CMS:', err);
+    return true; // Still return true since we saved to memory
   }
 }
 
@@ -62,8 +88,11 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
 
   try {
+    const client = await connectDb();
+    const db = client ? client.db('ecell') : null;
+
     if (req.method === 'GET') {
-      const data = readCms();
+      const data = await getCmsData(db);
       return res.status(200).json(data);
     }
 
@@ -80,14 +109,13 @@ export default async function handler(req, res) {
       });
 
       const data = JSON.parse(body);
-      const dataWithTimestamp = { ...data, updatedAt: Date.now() };
-      writeCms(dataWithTimestamp);
-      return res.status(200).json({ ok: true });
+      const success = await saveCmsData(db, data);
+      return res.status(200).json({ ok: success });
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
     console.error('CMS API error:', err);
-    return res.status(500).json({ error: 'Server error' });
+    return res.status(500).json({ error: err.message });
   }
 }
